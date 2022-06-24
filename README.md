@@ -1,6 +1,6 @@
 # Plugins
-* [Find And Replace](https://github.com/hossimo/AfterEffectsPlugins/edit/Find&Replace/README.md#find-and-replace)
-* [Comp Settings](https://github.com/hossimo/AfterEffectsPlugins/edit/Find&Replace/README.md#comp-settings)
+* [Find And Replace](https://github.com/hossimo/AfterEffectsPlugins#find-and-replace)
+* [Comp Settings](https://github.com/hossimo/AfterEffectsPlugins#comp-settings)
 
 ## Find And Replace
 This simple Plugin allows you to Find and Replace Text in Project Folders, Compisitions and Files and a few simple steps.
