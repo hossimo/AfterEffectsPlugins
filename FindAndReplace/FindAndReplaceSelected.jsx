@@ -18,6 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 {
+    var version = "1.0.0"
     var selection = app.project.selection;
     var scriptName = "Find and Replace with Selection";
     var searchTerm = "";
