@@ -34,7 +34,7 @@
     }
 
     function onGo() {
-        if (frame > 10789200 || frame < 0 || isNaN(frame)) {
+        if (frame > comp.duration || frame < 0 || isNaN(frame)) {
             alert("Invalid Frame", scriptName);
             return;
         }
@@ -47,6 +47,7 @@
             if (selection[i].typeName != "Composition")
                 continue;
                 //selection[i].time = frame
+                selection[i].resolutionFactor.setValue([1, 1]);
                 selection[i].saveFrameToPng(frame/selection[i].frameRate,  new File(path.toString() + "/" + selection[i].name + ".png"))
         }
         app.endUndoGroup();
@@ -75,7 +76,6 @@
                 alignment:['right','top'], \
                 frameStr: StaticText { text:'Frame:', alignment:['left','center'] }, \
                 frameEditText: EditText { text:'', characters:6, alignment:['left','center'] }, \
-                fpsEnable:  Checkbox {},\
             }, \
             cmds: Group { \
                 alignment:['fill','top'], \
