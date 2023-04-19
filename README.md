@@ -3,7 +3,7 @@
 * [Comp Settings](https://github.com/hossimo/AfterEffectsPlugins#comp-settings)
 
 ## Find And Replace
-This simple Plugin allows you to Find and Replace Text in Project Folders, Compisitions and Files and a few simple steps.
+This simple Plugin allows you to Find and Replace Text in Project Folders, Composition and Files and a few simple steps.
 
 ### Select 1 or more items from the project pane
 ![Select Files](https://github.com/hossimo/AfterEffectsPlugins/blob/main/Images/1-Select.png?raw=true)
@@ -22,3 +22,6 @@ By default the search terms are case sensitive, but you can also use [Regular Ex
 
 ## Comp Settings
 coming soon.
+
+
+https://buildmedia.readthedocs.org/media/pdf/after-effects-scripting-guide/latest/after-effects-scripting-guide.pdf

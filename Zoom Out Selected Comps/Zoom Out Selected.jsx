@@ -23,8 +23,8 @@
   // Get the selected compositions
   var selectedComps = app.project.selection;
 
-  for (var i = 0; i < selectedComps.length; i++) {
-    var comp = selectedComps[i];
+  for (var compIndex = 0; compIndex < selectedComps.length; compIndex++) {
+    var comp = selectedComps[compIndex];
     if (comp.typeName != "Composition")
       continue;
 

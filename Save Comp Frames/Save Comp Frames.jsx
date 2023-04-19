@@ -18,7 +18,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 {
-    var version = "1.0.1"
+    // logging
+    var Log = {};
+    Log.message = "";
+    Log.add = function (str) {
+        Log.message += str + "\n";
+    }
+    Log.print = function () {
+        alert(Log.message)
+    }
+
+    var version = "1.0.2"
     var selection = app.project.selection;
     var scriptName = "Save Comp Frames";
     var frame = 0;
@@ -26,7 +36,9 @@
     var palette;
     var path;
     var folder;
-    
+    Log.add("Starting " + scriptName + " Frames v" + version);
+    Log.add("-----------------------------")
+
 
     // Event Callbacks
 
@@ -35,22 +47,43 @@
     }
 
     function onGo() {
-        if (frame > comp.duration || frame < 0 || isNaN(frame)) {
-            alert("Invalid Frame", scriptName);
+        if (frame < 0 || isNaN(frame)) {
+            Log.add("Frame must be a number 0 or greater")
+            Log.print()
             return;
         }
-    path = Folder.selectDialog("Select a render output folder...");
+
+        path = Folder.selectDialog("Select a render output folder...");
+        if (!path) {
+            Log.add("No path selected")
+            Log.print()
+            return
+        }
+
 
         app.beginUndoGroup("Save Frames");
 
         for (i = 0; i < selection.length; i++) {
+
             // skip if not a comp
             if (selection[i].typeName != "Composition")
                 continue;
-                //selection[i].time = frame
-                selection[i].resolutionFactor.setValue([1, 1]);
-                selection[i].saveFrameToPng(frame/selection[i].frameRate,  new File(path.toString() + "/" + selection[i].name + ".png"))
+
+            if (frame > selection[i].duration){
+                Log.add("❌Skipped " + selection[i].name + " because frame is greater the comp duration")
+                continue;
+            }
+            // reset the scaling to 1:1
+            selection[i].resolutionFactor = [1,1];
+            
+            // save the file as a png
+            var result = selection[i].saveFrameToPng(frame / selection[i].frameRate, new File(path.toString() + "/" + selection[i].name + ".png"))
+            if (result._hasException)
+                Log.add("❌Failed - " + path.toString() + "/" + selection[i].name + ".png (" + result._exception + ")");
+                else
+                Log.add("✅ Saved - " + path.toString() + "/" + selection[i].name + ".png")
         }
+        Log.print();
         app.endUndoGroup();
         palette.close();
     }
@@ -81,14 +114,14 @@
             cmds: Group { \
                 alignment:['fill','top'], \
                 GoButton: Button { text:'Go', alignment:['fill','center'] }, \
-                CancelButton: Button { text:'Cencel', alignment:['fill','center'] }, \
+                CancelButton: Button { text:'Cancel', alignment:['fill','center'] }, \
             }, \
     }";
 
             palette.margins = [10, 10, 10, 10];
             palette.grp = palette.add(res);
 
-            // Workaround to ensure the editext text color is black, even at darker UI brightness levels
+            // Workaround to ensure the edit text text color is black, even at darker UI brightness levels
             var winGfx = palette.graphics;
             var darkColorBrush = winGfx.newPen(winGfx.BrushType.SOLID_COLOR, [0, 0, 0], 1);
             palette.grp.frameRow.frameEditText.graphics.foregroundColor = darkColorBrush;
