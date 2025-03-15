@@ -80,7 +80,7 @@
             var result = selection[i].saveFrameToPng(frame / selection[i].frameRate, new File(path.toString() + "/" + selection[i].name + ".png"))
             if (result._hasException)
                 Log.add("❌Failed - " + path.toString() + "/" + selection[i].name + ".png (" + result._exception + ")");
-                else
+            else
                 Log.add("✅ Saved - " + path.toString() + "/" + selection[i].name + ".png")
         }
         Log.print();

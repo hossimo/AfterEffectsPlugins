@@ -53,7 +53,7 @@
             alert("Replaced " + replaceCount + " Item(s)")    
             app.endUndoGroup();
         }
-        palette.close();
+        //palette.close();
         return;        
     }
 
